@@ -1,0 +1,28 @@
+/*
+Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+*/
+
+public class Solution 
+{
+    public ListNode addTwoNumbers(ListNode ln1, ListNode ln2) 
+    {
+        return calculate(ln1, ln2, 0); 
+    }
+    ListNode calculate(ListNode ln1, ListNode ln2, int carry)
+    {
+        if(ln1 == null && ln2 == null && carry == 0) 
+            return null;
+        if(ln1 == null && ln2 == null && carry != 0) 
+            return new ListNode(1);
+        
+        int temp = (ln1 == null? 0: ln1.val) + (ln2 == null? 0: ln2.val) + carry;
+        ListNode finalresult = new ListNode(temp%10);
+        finalresult.next = calculate(ln1 == null? null: ln1.next, ln2 == null? null: ln2.next, temp/10);
+        
+        return finalresult;
+	}
+}
